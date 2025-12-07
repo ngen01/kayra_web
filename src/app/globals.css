@@ -22,7 +22,7 @@ html {
 
 body {
   font-family: 'Inter', 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #050A14 0%, #0B1C3E 50%, #050A14 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 50%, #050A14 100%);
   color: #F8FAFC;
   overflow-x: hidden;
 }
@@ -45,27 +45,39 @@ body {
   background: #00F0FF;
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utilities */
 @layer utilities {
   .glass {
-    background: rgba(11, 28, 62, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 119, 190, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-light {
-    background: rgba(11, 28, 62, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 240, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #00F0FF 0%, #0077BE 100%);
+    background: linear-gradient(135deg, #00F0FF 0%, #0077BE 50%, #00F0FF 100%);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradient-shift 3s ease infinite;
   }
 
   .border-gradient {
@@ -73,29 +85,129 @@ body {
   }
 
   .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4),
-                0 0 40px rgba(0, 240, 255, 0.2),
-                0 0 60px rgba(0, 240, 255, 0.1);
+    box-shadow:
+      0 0 20px rgba(0, 240, 255, 0.4),
+      0 0 40px rgba(0, 240, 255, 0.2),
+      0 0 60px rgba(0, 240, 255, 0.1);
   }
 
   .glow-text {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5),
-                 0 0 20px rgba(0, 240, 255, 0.3);
+    text-shadow:
+      0 0 10px rgba(0, 240, 255, 0.5),
+      0 0 20px rgba(0, 240, 255, 0.3),
+      0 0 40px rgba(0, 240, 255, 0.2);
+  }
+
+  .liquid-glass {
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.37),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 }
 
-/* Wave animation for ocean effect */
+/* Gradient animation */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), 0 0 60px rgba(0, 240, 255, 0.4);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Wave animation */
 .wave-container {
   position: absolute;
   width: 200%;
   height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 119, 190, 0.03) 25%,
-    transparent 50%
-  );
+  background: repeating-linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 119, 190, 0.03) 25%,
+      transparent 50%);
   animation: wave 8s ease-in-out infinite;
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-25%);
+  }
 }
 
 /* Digital mesh overlay */
@@ -103,26 +215,26 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 119, 190, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 119, 190, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(0, 119, 190, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 119, 190, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
 }
 
-/* Hotspot pulse effect */
-@keyframes hotspot-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.5;
-  }
+/* Radial gradient helper */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
 }
 
-.hotspot {
-  animation: hotspot-pulse 2s ease-in-out infinite;
+/* Scanline Effect */
+.scanline {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 240, 255, 0.01) 51%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 50;
 }
 
 /* Gradient border animation */
@@ -133,8 +245,9 @@ body {
 }
 
 .animated-border {
-  --gradient-angle: 0deg;
-  border-image: linear-gradient(var(--gradient-angle), #00F0FF, #0077BE, #00F0FF) 1;
+  background: linear-gradient(#050A14, #050A14) padding-box,
+    conic-gradient(from var(--gradient-angle), #00F0FF, #0077BE, #00F0FF) border-box;
+  border: 2px solid transparent;
   animation: rotate-gradient 3s linear infinite;
 }
 
@@ -142,4 +255,23 @@ body {
   to {
     --gradient-angle: 360deg;
   }
+}
+
+/* Aurora effect */
+@keyframes aurora {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+.aurora {
+  animation: aurora 8s ease-in-out infinite;
 }

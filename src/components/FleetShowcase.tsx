@@ -133,8 +133,8 @@ export default function FleetShowcase() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center gap-3 px-6 py-4 rounded-xl transition-all duration-300 ${activeVehicle === index
-                    ? `bg-gradient-to-r ${v.color} text-navy-DEFAULT glow-cyan`
-                    : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
+                  ? `bg-gradient-to-r ${v.color} text-navy-DEFAULT glow-cyan`
+                  : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
                   }`}
               >
                 <Icon className="w-6 h-6" />
@@ -157,14 +157,70 @@ export default function FleetShowcase() {
             transition={{ duration: 0.5 }}
             className="grid lg:grid-cols-2 gap-12 items-center"
           >
-            {/* Left - 3D Visualization */}
+            {/* Left - Visualization */}
             <div className="relative h-[400px] lg:h-[500px] w-full">
               <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.bgColor} rounded-3xl blur-3xl opacity-50`} />
               <div className="relative h-full glass rounded-2xl border border-ocean-DEFAULT/30 overflow-hidden">
-                <ModelViewer vehicleId={vehicle.id} />
+                {/* USV: Show video */}
+                {vehicle.id === 'usv' ? (
+                  <div className="relative w-full h-full">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover"
+                    >
+                      <source src="/usv-demo.mp4" type="video/mp4" />
+                    </video>
+
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-cyan-DEFAULT border border-cyan-DEFAULT/30 rounded-full">
+                        SURFACE VIEW
+                      </span>
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-ocean-DEFAULT border border-ocean-DEFAULT/30 rounded-full">
+                        UNDERWATER
+                      </span>
+                    </div>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-navy-950/20 pointer-events-none" />
+                  </div>
+                ) : vehicle.id === 'uav' ? (
+                  /* UAV: Show aerial video */
+                  <div className="relative w-full h-full">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover"
+                    >
+                      <source src="/İnsansız_Hava_Aracı_Videosu_Hazır.mp4" type="video/mp4" />
+                    </video>
+
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-cyan-DEFAULT border border-cyan-DEFAULT/30 rounded-full">
+                        AERIAL SURVEILLANCE
+                      </span>
+                    </div>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-navy-950/20 pointer-events-none" />
+                  </div>
+                ) : (
+                  /* ROV: Show 3D model */
+                  <ModelViewer vehicleId={vehicle.id} />
+                )}
 
                 <div className="absolute bottom-4 left-0 right-0 text-center pointer-events-none">
-                  <p className="text-xs font-mono text-cyan-DEFAULT/70">INTERACTIVE 3D MODEL</p>
+                  <p className="text-xs font-mono text-cyan-DEFAULT/70">
+                    {vehicle.id === 'usv' ? 'USV LIVE DEMONSTRATION' :
+                      vehicle.id === 'uav' ? 'UAV FLIGHT FOOTAGE' :
+                        'INTERACTIVE 3D MODEL'}
+                  </p>
                 </div>
               </div>
             </div>
