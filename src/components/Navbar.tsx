@@ -2,7 +2,22 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Waves } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+
+// Custom North Star icon matching KAYRA logo
+function NorthStar({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      {/* Vertical line */}
+      <path d="M12 0 L12 24" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      {/* Horizontal line */}
+      <path d="M0 12 L24 12" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      {/* Center diamond */}
+      <path d="M12 2 L14 12 L12 22 L10 12 Z" fill="currentColor" />
+      <path d="M2 12 L12 10 L22 12 L12 14 Z" fill="currentColor" />
+    </svg>
+  )
+}
 
 const navLinks = [
   { name: 'Technology', href: '#technology' },
@@ -28,9 +43,8 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass py-3' : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-3' : 'bg-transparent py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -42,7 +56,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.98 }}
           >
             <div className="relative w-10 h-10 flex items-center justify-center">
-              <Waves className="w-8 h-8 text-cyan-DEFAULT group-hover:text-cyan-DEFAULT transition-colors" />
+              <NorthStar className="w-8 h-8 text-white group-hover:text-cyan-DEFAULT transition-colors" />
               <div className="absolute inset-0 bg-cyan-DEFAULT/20 rounded-full blur-lg group-hover:bg-cyan-DEFAULT/40 transition-all" />
             </div>
             <div className="flex flex-col">

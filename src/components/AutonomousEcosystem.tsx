@@ -107,7 +107,7 @@ export default function AutonomousEcosystem() {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
 
   return (
-    <section className="relative py-32 overflow-hidden bg-navy-950">
+    <section className="relative py-16 sm:py-32 overflow-hidden bg-navy-950">
       {/* Background Grid & Glow */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,240,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,240,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -118,18 +118,18 @@ export default function AutonomousEcosystem() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
-          <h2 className="font-heading text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="font-heading text-3xl sm:text-5xl md:text-6xl font-black text-white mb-4 sm:mb-6 tracking-tight">
             THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">HIVE MIND</span>
           </h2>
-          <p className="font-body text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="font-body text-base sm:text-xl text-slate-400 max-w-2xl mx-auto px-4">
             A unified battle-space network where every node thinks, communicates, and acts as one.
           </p>
         </motion.div>
 
-        {/* 3D Holographic Map Container */}
-        <div ref={ref} className="relative h-[600px] mb-32 perspective-1000">
+        {/* 3D Holographic Map Container - Hidden on mobile, simplified */}
+        <div ref={ref} className="relative h-[300px] sm:h-[600px] mb-16 sm:mb-32 perspective-1000 hidden sm:block">
           {/* Tilted Plane */}
           <motion.div
             initial={{ rotateX: 45, scale: 0.8, opacity: 0 }}
@@ -274,7 +274,7 @@ export default function AutonomousEcosystem() {
         </div>
 
         {/* Hexagon Capabilities Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {capabilities.map((cap, index) => {
             const Icon = cap.icon
             return (
@@ -288,18 +288,18 @@ export default function AutonomousEcosystem() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative h-full bg-navy-900/50 border border-white/5 hover:border-cyan-500/50 p-8 rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-2">
+                <div className="relative h-full bg-navy-900/50 border border-white/5 hover:border-cyan-500/50 p-4 sm:p-8 rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-2">
                   {/* Hexagon Icon Background */}
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                     <Hexagon className="w-24 h-24 text-cyan-500" />
                   </div>
 
                   <div className="relative z-10">
-                    <div className="w-12 h-12 mb-6 rounded-lg bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 mb-4 sm:mb-6 rounded-lg bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-6 h-6 text-cyan-400" />
                     </div>
 
-                    <h3 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-cyan-300 transition-colors">
                       {cap.title}
                     </h3>
                     <p className="font-body text-slate-400 group-hover:text-slate-300 leading-relaxed">

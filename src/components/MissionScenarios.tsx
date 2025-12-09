@@ -126,7 +126,7 @@ export default function MissionScenarios() {
                 preload="metadata"
                 className="w-full h-full object-cover"
               >
-                <source src="/Otonom_Sistemler_Tanıtım_Videosu.mp4" type="video/mp4" />
+                <source src="/videos/mission-intro.mp4" type="video/mp4" />
               </video>
               {/* Overlay gradient for better text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />

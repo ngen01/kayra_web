@@ -100,7 +100,7 @@ function OceanWaves() {
 function Moon() {
   return (
     <motion.div
-      className="absolute top-20 right-20 w-32 h-32"
+      className="absolute top-10 right-4 sm:top-20 sm:right-20 w-16 h-16 sm:w-32 sm:h-32"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 2, delay: 0.5 }}
@@ -162,7 +162,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        style={{ backgroundImage: "url('/images/hero-bg.png')" }}
       />
 
       {/* Dark overlay for text readability */}
@@ -211,7 +211,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="font-heading text-5xl md:text-6xl lg:text-7xl font-black leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
+              className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
             >
               <span className="text-white" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>Autonomous</span>
               <br />
@@ -234,7 +234,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="font-body text-xl font-semibold text-white max-w-xl leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              className="font-body text-base sm:text-xl font-semibold text-white max-w-xl leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               Next-generation autonomous systems powered by advanced AI and robotics.
               Ground, aerial, and swarm platforms engineered for precision, adaptability,
@@ -246,7 +246,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex gap-3"
+              className="flex flex-wrap gap-2 sm:gap-3"
             >
               {platforms.map((platform, index) => {
                 const Icon = platform.icon
@@ -256,7 +256,7 @@ export default function HeroSection() {
                     onClick={() => setActivePlatform(index)}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`relative flex items-center gap-2 px-6 py-4 rounded-xl transition-all duration-300 overflow-hidden ${activePlatform === index
+                    className={`relative flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-4 rounded-xl transition-all duration-300 overflow-hidden ${activePlatform === index
                       ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.3)]'
                       : 'bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20'
                       }`}
@@ -268,8 +268,8 @@ export default function HeroSection() {
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       />
                     )}
-                    <Icon className={`w-5 h-5 relative z-10 ${activePlatform === index ? 'text-cyan-400' : 'text-slate-400'}`} />
-                    <span className={`font-heading font-semibold relative z-10 ${activePlatform === index ? 'text-white' : 'text-slate-300'}`}>
+                    <Icon className={`w-4 h-4 sm:w-5 sm:h-5 relative z-10 ${activePlatform === index ? 'text-cyan-400' : 'text-slate-400'}`} />
+                    <span className={`font-heading text-xs sm:text-base font-semibold relative z-10 ${activePlatform === index ? 'text-white' : 'text-slate-300'}`}>
                       {platform.name}
                     </span>
                   </motion.button>
@@ -310,7 +310,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0,240,255,0.4)' }}
                 whileTap={{ scale: 0.95 }}
-                className="relative px-8 py-4 font-heading text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl overflow-hidden group"
+                className="relative px-4 sm:px-8 py-3 sm:py-4 font-heading text-xs sm:text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl overflow-hidden group"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -320,7 +320,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(0,240,255,0.1)' }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 font-heading text-sm font-semibold tracking-wider text-cyan-400 border-2 border-cyan-400/50 rounded-xl backdrop-blur-sm"
+                className="px-4 sm:px-8 py-3 sm:py-4 font-heading text-xs sm:text-sm font-semibold tracking-wider text-cyan-400 border-2 border-cyan-400/50 rounded-xl backdrop-blur-sm"
               >
                 Watch Demo
               </motion.button>

@@ -18,24 +18,24 @@ const fleet = [
     subtitle: 'Unmanned Surface Vehicle',
     turkishName: 'İDA - İnsansız Deniz Aracı',
     icon: Waves,
-    description: 'High-speed autonomous surface vessel designed for maritime security, surveillance, and multi-domain coordination. The nerve center of our autonomous fleet.',
+    description: 'Autonomous surface vessel powered by Jetson Orin Nano Super running ROS 2 Jazzy on Ubuntu 24.04. Features 3D LiDAR, stereo camera, and AI-powered computer vision with OpenCV & YOLO.',
     color: 'from-ocean-DEFAULT to-cyan-DEFAULT',
     bgColor: 'from-ocean-DEFAULT/20 to-cyan-DEFAULT/10',
     specs: [
-      { icon: Ruler, label: 'Length', value: '12m' },
-      { icon: Gauge, label: 'Max Speed', value: '35 kts' },
-      { icon: Timer, label: 'Endurance', value: '72h' },
-      { icon: Weight, label: 'Payload', value: '2,000 kg' },
-      { icon: Battery, label: 'Power', value: 'Hybrid' },
-      { icon: Radio, label: 'Range', value: '500+ nm' },
+      { icon: Ruler, label: 'Dimensions', value: '80x24x23cm' },
+      { icon: Gauge, label: 'Speed', value: '2.5 kts' },
+      { icon: Timer, label: 'Operation', value: '5+ hours' },
+      { icon: Weight, label: 'Payload', value: '20 kg' },
+      { icon: Battery, label: 'Computer', value: 'Jetson Orin' },
+      { icon: Radio, label: 'Range', value: '40+ km' },
     ],
     capabilities: [
-      'Level 4+ Autonomous Navigation',
-      'SATCOM & Multi-Link Communication',
-      'EO/IR & Radar Sensor Fusion',
-      'UAV Launch & Recovery Platform',
-      'ROV Deployment Capability',
-      'Anti-Collision COLREGS Compliant',
+      'Jetson Orin Nano Super',
+      'ROS 2 Jazzy + Ubuntu 24.04',
+      '3D LiDAR & Stereo Camera',
+      'OpenCV + YOLO AI Vision',
+      'Dual-Motor Propulsion',
+      'Point Cloud Processing',
     ],
   },
   {
@@ -44,50 +44,50 @@ const fleet = [
     subtitle: 'Unmanned Aerial Vehicle',
     turkishName: 'İHA - İnsansız Hava Aracı',
     icon: Plane,
-    description: 'Fixed-wing tactical UAV platform for extended aerial surveillance, reconnaissance, and real-time intelligence gathering. Deployable from USV or land.',
+    description: 'Fixed-wing tactical UAV platform for extended aerial surveillance, reconnaissance, and real-time intelligence gathering. Currently in development.',
     color: 'from-cyan-DEFAULT to-blue-400',
     bgColor: 'from-cyan-DEFAULT/20 to-blue-400/10',
     specs: [
-      { icon: Ruler, label: 'Wingspan', value: '4.5m' },
-      { icon: Gauge, label: 'Max Speed', value: '150 km/h' },
-      { icon: Timer, label: 'Endurance', value: '12h' },
-      { icon: Weight, label: 'Payload', value: '15 kg' },
-      { icon: Battery, label: 'Power', value: 'Electric' },
-      { icon: Radio, label: 'Range', value: '150 km' },
+      { icon: Ruler, label: 'Specs', value: 'Coming Soon' },
+      { icon: Gauge, label: 'Speed', value: 'Coming Soon' },
+      { icon: Timer, label: 'Endurance', value: 'Coming Soon' },
+      { icon: Weight, label: 'Payload', value: 'Coming Soon' },
+      { icon: Battery, label: 'Power', value: 'Coming Soon' },
+      { icon: Radio, label: 'Range', value: 'Coming Soon' },
     ],
     capabilities: [
-      'Autonomous Takeoff & Landing',
-      'EO/IR Gimbal Stabilized Camera',
-      'Real-time Video Streaming',
-      'GPS-Denied Navigation',
-      'Swarm Coordination Ready',
-      'USV Launch & Recovery',
+      'Coming Soon',
+      'Coming Soon',
+      'Coming Soon',
+      'Coming Soon',
+      'Coming Soon',
+      'Coming Soon',
     ],
   },
   {
     id: 'rov' as const,
     name: 'KAYRA ROV',
-    subtitle: 'Remotely Operated Vehicle',
+    subtitle: 'Inspection Class ROV',
     turkishName: 'ROV - Uzaktan Kumandalı Sualtı Aracı',
     icon: Anchor,
-    description: 'Advanced underwater inspection and intervention ROV for subsea operations, pipeline inspection, and underwater reconnaissance.',
+    description: 'Inspection Class Remotely Operated Vehicle featuring Cast Polyamide Chassis with Acrylic Watertight Enclosure. Powered by Raspberry Pi 5 running ROS 2 Humble Hawksbill on Ubuntu 22.04 LTS.',
     color: 'from-yellow-500 to-orange-500',
     bgColor: 'from-yellow-500/20 to-orange-500/10',
     specs: [
-      { icon: Ruler, label: 'Depth Rating', value: '300m' },
-      { icon: Gauge, label: 'Speed', value: '4 kts' },
-      { icon: Timer, label: 'Operation', value: '8h' },
-      { icon: Weight, label: 'Payload', value: '50 kg' },
-      { icon: Battery, label: 'Power', value: 'Tethered' },
-      { icon: Eye, label: 'Cameras', value: '4K HDR' },
+      { icon: Ruler, label: 'Dimensions', value: '440x300x220mm' },
+      { icon: Gauge, label: 'Thrusters', value: '6-Vector' },
+      { icon: Timer, label: 'Computer', value: 'RPi 5 8GB' },
+      { icon: Weight, label: 'Battery', value: '4S 6P Li-Ion' },
+      { icon: Battery, label: 'Data Link', value: '30m RJ45' },
+      { icon: Eye, label: 'Camera', value: 'Fisheye Wide' },
     ],
     capabilities: [
-      '6-DOF Precision Control',
-      'Manipulator Arms',
-      'Sonar & USBL Positioning',
-      'LED Lighting Array',
-      'Auto Depth & Heading Hold',
-      'USV Tether Management',
+      '6-Thruster Vector Configuration',
+      'ROS 2 Humble Hawksbill',
+      'MPU6050 IMU (6-Axis)',
+      'Low-Latency Ethernet Streaming',
+      'Custom User Interface',
+      'Flanged O-Ring Sealing',
     ],
   },
 ]
@@ -123,7 +123,7 @@ export default function FleetShowcase() {
         </motion.div>
 
         {/* Vehicle selector tabs */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
           {fleet.map((v, index) => {
             const Icon = v.icon
             return (
@@ -132,15 +132,15 @@ export default function FleetShowcase() {
                 onClick={() => setActiveVehicle(index)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-3 px-6 py-4 rounded-xl transition-all duration-300 ${activeVehicle === index
+                className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-6 py-2 sm:py-4 rounded-xl transition-all duration-300 ${activeVehicle === index
                   ? `bg-gradient-to-r ${v.color} text-navy-DEFAULT glow-cyan`
                   : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
                   }`}
               >
-                <Icon className="w-6 h-6" />
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 <div className="text-left">
-                  <div className="font-heading font-bold">{v.name.split(' ')[1]}</div>
-                  <div className="text-xs opacity-80">{v.subtitle}</div>
+                  <div className="font-heading text-sm sm:text-base font-bold">{v.name.split(' ')[1]}</div>
+                  <div className="text-xs opacity-80 hidden sm:block">{v.subtitle}</div>
                 </div>
               </motion.button>
             )
@@ -155,13 +155,13 @@ export default function FleetShowcase() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            className="grid lg:grid-cols-2 gap-6 sm:gap-12 items-center"
           >
             {/* Left - Visualization */}
-            <div className="relative h-[400px] lg:h-[500px] w-full">
+            <div className="relative h-[280px] sm:h-[400px] lg:h-[500px] w-full">
               <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.bgColor} rounded-3xl blur-3xl opacity-50`} />
               <div className="relative h-full glass rounded-2xl border border-ocean-DEFAULT/30 overflow-hidden">
-                {/* USV: Show video */}
+                {/* USV: Coming Soon with blur */}
                 {vehicle.id === 'usv' ? (
                   <div className="relative w-full h-full">
                     <video
@@ -170,26 +170,23 @@ export default function FleetShowcase() {
                       muted
                       playsInline
                       preload="metadata"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover blur-sm"
                     >
-                      <source src="/usv-demo.mp4" type="video/mp4" />
+                      <source src="/videos/usv-demo.mp4" type="video/mp4" />
                     </video>
 
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-cyan-DEFAULT border border-cyan-DEFAULT/30 rounded-full">
-                        SURFACE VIEW
-                      </span>
+                    {/* Blur overlay with Coming Soon */}
+                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
+                      <div className="text-center">
+                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-cyan-500/30 to-ocean-500/30 border-2 border-cyan-DEFAULT/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(0,240,255,0.3)]">
+                          COMING SOON
+                        </span>
+                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
+                      </div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-ocean-DEFAULT border border-ocean-DEFAULT/30 rounded-full">
-                        UNDERWATER
-                      </span>
-                    </div>
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-navy-950/20 pointer-events-none" />
                   </div>
                 ) : vehicle.id === 'uav' ? (
-                  /* UAV: Show aerial video */
+                  /* UAV: Coming Soon with blur */
                   <div className="relative w-full h-full">
                     <video
                       autoPlay
@@ -197,38 +194,54 @@ export default function FleetShowcase() {
                       muted
                       playsInline
                       preload="metadata"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover blur-sm"
                     >
-                      <source src="/İnsansız_Hava_Aracı_Videosu_Hazır.mp4" type="video/mp4" />
+                      <source src="/videos/uav-demo.mp4" type="video/mp4" />
                     </video>
 
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 text-xs font-mono bg-navy-900/80 backdrop-blur-sm text-cyan-DEFAULT border border-cyan-DEFAULT/30 rounded-full">
-                        AERIAL SURVEILLANCE
-                      </span>
+                    {/* Blur overlay with Coming Soon */}
+                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
+                      <div className="text-center">
+                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border-2 border-cyan-DEFAULT/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(0,240,255,0.3)]">
+                          COMING SOON
+                        </span>
+                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
+                      </div>
                     </div>
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-navy-950/20 pointer-events-none" />
                   </div>
                 ) : (
-                  /* ROV: Show 3D model */
-                  <ModelViewer vehicleId={vehicle.id} />
+                  /* ROV: Coming Soon with video blur */
+                  <div className="relative w-full h-full">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover blur-sm"
+                    >
+                      <source src="/videos/rov-demo.mp4" type="video/mp4" />
+                    </video>
+                    {/* Blur overlay with Coming Soon */}
+                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
+                      <div className="text-center">
+                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-2 border-yellow-500/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(234,179,8,0.3)]">
+                          COMING SOON
+                        </span>
+                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
+                      </div>
+                    </div>
+                  </div>
                 )}
 
-                <div className="absolute bottom-4 left-0 right-0 text-center pointer-events-none">
-                  <p className="text-xs font-mono text-cyan-DEFAULT/70">
-                    {vehicle.id === 'usv' ? 'USV LIVE DEMONSTRATION' :
-                      vehicle.id === 'uav' ? 'UAV FLIGHT FOOTAGE' :
-                        'INTERACTIVE 3D MODEL'}
-                  </p>
-                </div>
+                {/* Bottom label removed since Coming Soon is shown */}
               </div>
             </div>
 
             {/* Right - Details */}
             <div className="space-y-8">
               <div>
-                <h3 className="font-heading text-3xl font-bold text-white mb-4">
+                <h3 className="font-heading text-xl sm:text-3xl font-bold text-white mb-2 sm:mb-4">
                   {vehicle.name}
                 </h3>
                 <p className="font-body text-metallic-DEFAULT leading-relaxed">
@@ -237,16 +250,16 @@ export default function FleetShowcase() {
               </div>
 
               {/* Specs grid */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
                 {vehicle.specs.map((spec) => {
                   const Icon = spec.icon
                   return (
                     <div
                       key={spec.label}
-                      className="glass rounded-lg p-4 border border-ocean-DEFAULT/20 text-center"
+                      className="glass rounded-lg p-2 sm:p-4 border border-ocean-DEFAULT/20 text-center"
                     >
-                      <Icon className="w-5 h-5 text-cyan-DEFAULT mx-auto mb-2" />
-                      <div className="font-heading text-lg font-bold text-white">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-DEFAULT mx-auto mb-1 sm:mb-2" />
+                      <div className="font-heading text-sm sm:text-lg font-bold text-white">
                         {spec.value}
                       </div>
                       <div className="font-body text-xs text-metallic-dark uppercase tracking-wider">
@@ -262,7 +275,7 @@ export default function FleetShowcase() {
                 <h4 className="font-heading text-sm font-semibold text-cyan-DEFAULT uppercase tracking-widest mb-4">
                   Key Capabilities
                 </h4>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {vehicle.capabilities.map((cap, index) => (
                     <motion.div
                       key={cap}
@@ -279,7 +292,7 @@ export default function FleetShowcase() {
               </div>
 
               {/* CTA */}
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-2 sm:gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
