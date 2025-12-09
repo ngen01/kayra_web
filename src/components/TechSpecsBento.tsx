@@ -45,8 +45,8 @@ const techSpecs = [
   {
     title: 'UAV Propulsion',
     icon: Disc3,
-    detail: 'Electric pusher motor with high-efficiency propeller for extended flight time.',
-    stats: { label: 'Flight Time', value: '12h' },
+    detail: 'Coming Soon - Aerial platform specifications under development.',
+    stats: { label: 'Status', value: 'Coming Soon' },
     size: 'medium',
     gradient: 'from-cyan-DEFAULT/20 to-blue-400/20',
     platforms: ['uav'],
@@ -99,8 +99,8 @@ const techSpecs = [
   {
     title: 'Aerial Sensors',
     icon: Camera,
-    detail: '4K EO/IR gimbal camera with 40x optical zoom and thermal imaging.',
-    stats: { label: 'Resolution', value: '4K HDR' },
+    detail: 'Coming Soon - Aerial sensor suite specifications under development.',
+    stats: { label: 'Status', value: 'Coming Soon' },
     size: 'large',
     gradient: 'from-cyan-DEFAULT/20 to-blue-400/20',
     platforms: ['uav'],
@@ -205,8 +205,8 @@ export default function TechSpecsBento() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${activeTab === tab.id
-                    ? 'bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT text-navy-DEFAULT'
-                    : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
+                  ? 'bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT text-navy-DEFAULT'
+                  : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
                   }`}
               >
                 <Icon className="w-4 h-4" />

@@ -108,20 +108,16 @@ export default function Footer() {
         </motion.div>
 
         {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Logo and description */}
-          <div className="col-span-2">
+          <div>
             <motion.a
               href="#"
               className="flex items-center gap-3 group mb-6"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <NorthStar className="w-8 h-8 text-white group-hover:text-cyan-DEFAULT transition-colors" />
-                <div className="absolute inset-0 bg-cyan-DEFAULT/20 rounded-full blur-lg group-hover:bg-cyan-DEFAULT/40 transition-all" />
-              </div>
               <div className="flex flex-col">
-                <span className="font-heading text-xl font-bold tracking-wider text-white">
+                <span className="font-heading text-xl font-bold tracking-wider text-white group-hover:text-cyan-DEFAULT transition-colors">
                   KAYRA
                 </span>
                 <span className="font-heading text-[10px] tracking-[0.3em] text-metallic-DEFAULT uppercase">
@@ -143,83 +139,19 @@ export default function Footer() {
                 <Mail className="w-4 h-4" />
                 contact@kayratechnology.com
               </a>
-              <a
-                href="tel:+901234567890"
-                className="flex items-center gap-3 text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                +90 (123) 456 7890
-              </a>
               <div className="flex items-center gap-3 text-sm text-metallic-DEFAULT">
                 <MapPin className="w-4 h-4" />
-                Istanbul, Turkey
+                Istanbul, ITU Teknopark
               </div>
             </div>
           </div>
 
-          {/* Technology links */}
-          <div>
-            <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Technology
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.technology.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company links */}
-          <div>
-            <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Company
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources links */}
-          <div>
-            <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Resources
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Social links */}
-          <div>
+          <div className="md:text-right">
             <h4 className="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Connect
             </h4>
-            <div className="flex gap-3">
+            <div className="flex gap-3 md:justify-end">
               {[
                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
                 { icon: Twitter, href: '#', label: 'X (Twitter)' },

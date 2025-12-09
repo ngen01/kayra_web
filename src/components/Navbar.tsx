@@ -41,18 +41,8 @@ export default function Navbar() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <div className="relative w-10 h-10 flex items-center justify-center">
-              <Image
-                src="/images/kayra-logo.png"
-                alt="KAYRA Logo"
-                width={32}
-                height={32}
-                className="object-contain group-hover:brightness-125 transition-all"
-              />
-              <div className="absolute inset-0 bg-cyan-DEFAULT/20 rounded-full blur-lg group-hover:bg-cyan-DEFAULT/40 transition-all" />
-            </div>
             <div className="flex flex-col">
-              <span className="font-heading text-xl font-bold tracking-wider text-white">
+              <span className="font-heading text-xl font-bold tracking-wider text-white group-hover:text-cyan-DEFAULT transition-colors">
                 KAYRA
               </span>
               <span className="font-heading text-[10px] tracking-[0.3em] text-metallic-DEFAULT uppercase">
