@@ -1,8 +1,20 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Waves, Linkedin, Twitter, Instagram, Mail, MapPin, Phone, ArrowRight } from 'lucide-react'
+import { Linkedin, Twitter, Instagram, Mail, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
+
+// Custom North Star icon matching KAYRA logo
+function NorthStar({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 0 L12 24" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      <path d="M0 12 L24 12" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      <path d="M12 2 L14 12 L12 22 L10 12 Z" fill="currentColor" />
+      <path d="M2 12 L12 10 L22 12 L12 14 Z" fill="currentColor" />
+    </svg>
+  )
+}
 
 const footerLinks = {
   technology: [
@@ -107,7 +119,7 @@ export default function Footer() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="relative w-10 h-10 flex items-center justify-center">
-                <Waves className="w-8 h-8 text-cyan-DEFAULT" />
+                <NorthStar className="w-8 h-8 text-white group-hover:text-cyan-DEFAULT transition-colors" />
                 <div className="absolute inset-0 bg-cyan-DEFAULT/20 rounded-full blur-lg group-hover:bg-cyan-DEFAULT/40 transition-all" />
               </div>
               <div className="flex flex-col">
@@ -115,7 +127,7 @@ export default function Footer() {
                   KAYRA
                 </span>
                 <span className="font-heading text-[10px] tracking-[0.3em] text-metallic-DEFAULT uppercase">
-                  Robotics
+                  Consulting
                 </span>
               </div>
             </motion.a>
@@ -127,11 +139,11 @@ export default function Footer() {
             {/* Contact info */}
             <div className="space-y-3">
               <a
-                href="mailto:contact@kayrarobotics.com"
+                href="mailto:contact@kayraconsulting.com"
                 className="flex items-center gap-3 text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                contact@kayrarobotics.com
+                contact@kayraconsulting.com
               </a>
               <a
                 href="tel:+901234567890"
@@ -234,7 +246,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-ocean-DEFAULT/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-body text-sm text-metallic-dark">
-              &copy; 2025 Kayra Robotics Technology. All rights reserved.
+              &copy; 2025 Kayra Consulting. All rights reserved.
             </p>
             <div className="flex gap-6">
               <a

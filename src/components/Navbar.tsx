@@ -64,7 +64,7 @@ export default function Navbar() {
                 KAYRA
               </span>
               <span className="font-heading text-[10px] tracking-[0.3em] text-metallic-DEFAULT uppercase">
-                Robotics
+                Consulting
               </span>
             </div>
           </motion.a>

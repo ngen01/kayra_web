@@ -8,7 +8,7 @@ export default function RoboticBackground() {
         <div className="absolute inset-0 z-0">
             <Image
                 src="/images/hero-bg.png"
-                alt="KAYRA Robotik Background"
+                alt="KAYRA Consulting Background"
                 fill
                 priority
                 className="object-cover"

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Kayra Robotics | Autonomous Mastery of the Seas',
-  description: 'Next-generation Unmanned Surface Vehicles engineered for precision, endurance, and intelligence. Advanced maritime autonomous systems for defense, research, and commercial applications.',
-  keywords: 'USV, Unmanned Surface Vehicle, Maritime Robotics, Autonomous Vessels, Marine Technology, Defense Systems',
+  title: 'Kayra Consulting | Autonomous Mastery of the Seas',
+  description: 'Cutting-edge autonomous maritime systems by Kayra Consulting',
+  keywords: 'USV, Unmanned Surface Vehicle, Maritime Consulting, Autonomous Vessels, Marine Technology, Defense Systems',
 }
 
 export default function RootLayout({
