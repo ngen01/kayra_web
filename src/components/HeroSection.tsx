@@ -168,7 +168,7 @@ export default function HeroSection() {
           fill
           priority
           quality={100}
-          className="object-cover object-center md:object-right"
+          className="object-cover object-[50%_20%] sm:object-[70%_30%] md:object-right"
           sizes="100vw"
         />
       </div>
