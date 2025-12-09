@@ -198,82 +198,8 @@ export default function HeroSection() {
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 pt-24"
       >
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          {/* Left content */}
+          {/* Left content - empty for clean background display */}
           <div className="space-y-8">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <LiquidGlassCard className="inline-flex items-center gap-3 px-5 py-3">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                <span className="font-body text-sm font-semibold text-white">
-                  Full Spectrum Autonomous Systems
-                </span>
-              </LiquidGlassCard>
-            </motion.div>
-
-            {/* Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
-            >
-              <span className="text-white" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>Autonomous</span>
-              <br />
-              <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{ duration: 5, repeat: Infinity }}
-                style={{ backgroundSize: '200% 200%' }}
-              >
-                Dominance
-              </motion.span>
-              <br />
-              <span className="text-white" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>Everywhere</span>
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="font-body text-base sm:text-xl font-semibold text-white max-w-xl leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-            >
-              Next-generation autonomous systems powered by advanced AI and robotics.
-              Ground, aerial, and swarm platforms engineered for precision, adaptability,
-              and intelligent decision-making.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="flex flex-wrap gap-4 pt-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0,240,255,0.4)' }}
-                whileTap={{ scale: 0.95 }}
-                className="relative px-4 sm:px-8 py-3 sm:py-4 font-heading text-xs sm:text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl overflow-hidden group"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                />
-                <span className="relative z-10">Explore All Platforms</span>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(0,240,255,0.1)' }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 sm:px-8 py-3 sm:py-4 font-heading text-xs sm:text-sm font-semibold tracking-wider text-cyan-400 border-2 border-cyan-400/50 rounded-xl backdrop-blur-sm"
-              >
-                Watch Demo
-              </motion.button>
-            </motion.div>
           </div>
 
           {/* Right content - 3D Visualization */}

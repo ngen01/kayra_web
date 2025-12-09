@@ -16,31 +16,31 @@ const platformTabs = [
 
 const techSpecs = [
   {
-    title: 'AI Navigation',
-    icon: Brain,
-    detail: 'Level 4+ Autonomy with real-time obstacle avoidance and path planning across all domains.',
-    stats: { label: 'Autonomy Level', value: 'L4+' },
+    title: 'Hybrid & Electric Power',
+    icon: Zap,
+    detail: 'Optimized hybrid-electric power architecture designed for high-efficiency energy distribution, adaptive load control, and continuous mission reliability.',
+    stats: { label: 'USV Endurance', value: '10h' },
     size: 'large',
     gradient: 'from-cyan-DEFAULT/20 to-ocean-DEFAULT/20',
-    platforms: ['all', 'usv', 'uav', 'rov'],
+    platforms: ['all', 'usv'],
   },
   {
-    title: 'Propulsion Systems',
-    icon: Disc3,
-    detail: 'Hybrid diesel-electric for USV, electric motors for UAV & ROV with optimized efficiency.',
-    stats: { label: 'Combined Range', value: '650+ nm' },
-    size: 'medium',
-    gradient: 'from-ocean-DEFAULT/20 to-navy-50/20',
-    platforms: ['all'],
+    title: 'Navigation & State Estimation',
+    icon: Navigation,
+    detail: 'Sensor fusion with EKF-based state estimation integrating GNSS, IMU, and environmental sensors for real-time positioning and drift compensation.',
+    stats: { label: 'Accuracy', value: '<1m' },
+    size: 'large',
+    gradient: 'from-ocean-DEFAULT/20 to-cyan-DEFAULT/20',
+    platforms: ['all', 'usv'],
   },
   {
-    title: 'USV Propulsion',
+    title: 'Propulsion Control',
     icon: Disc3,
-    detail: 'High-efficiency hybrid diesel-electric system with waterjet drives for superior speed.',
-    stats: { label: 'Max Speed', value: '35 kts' },
+    detail: 'Brushless DC motors with PID-based regulation providing stabilized thrust, smooth low-speed maneuvering, and fast transient response.',
+    stats: { label: 'Control', value: 'PID' },
     size: 'medium',
     gradient: 'from-ocean-DEFAULT/20 to-navy-50/20',
-    platforms: ['usv'],
+    platforms: ['all', 'usv'],
   },
   {
     title: 'UAV Propulsion',
@@ -54,8 +54,8 @@ const techSpecs = [
   {
     title: 'ROV Thrusters',
     icon: Disc3,
-    detail: '8 vectored thrusters for 6-DOF movement with precision positioning.',
-    stats: { label: 'Thrust', value: '45 kgf' },
+    detail: '6-thruster vectored configuration for 6-DOF movement with precision positioning.',
+    stats: { label: 'DOF', value: '6' },
     size: 'medium',
     gradient: 'from-yellow-500/20 to-orange-500/20',
     platforms: ['rov'],
@@ -64,7 +64,7 @@ const techSpecs = [
     title: 'Communication',
     icon: Satellite,
     detail: 'Encrypted SATCOM, LOS radio, and mesh networking for seamless C2.',
-    stats: { label: 'Latency', value: '<50ms' },
+    stats: { label: 'Range', value: '40+ km' },
     size: 'medium',
     gradient: 'from-cyan-DEFAULT/10 to-ocean-DEFAULT/20',
     platforms: ['all', 'usv', 'uav'],
@@ -81,7 +81,7 @@ const techSpecs = [
   {
     title: 'Multi-Sensor Fusion',
     icon: Eye,
-    detail: 'EO/IR cameras, LIDAR, RADAR, and sonar integration across platforms.',
+    detail: 'LiDAR, stereo cameras, IMU integration with point cloud processing for real-time perception.',
     stats: { label: 'Coverage', value: '360°' },
     size: 'large',
     gradient: 'from-navy-50/20 to-ocean-DEFAULT/20',
@@ -90,8 +90,8 @@ const techSpecs = [
   {
     title: 'Surface Sensors',
     icon: Eye,
-    detail: 'AESA radar, EO/IR gimbal, and LIDAR for surface surveillance.',
-    stats: { label: 'Range', value: '24 nm' },
+    detail: '3D LiDAR and stereo camera for surface surveillance and obstacle detection.',
+    stats: { label: 'Processing', value: 'Real-time' },
     size: 'large',
     gradient: 'from-ocean-DEFAULT/20 to-cyan-DEFAULT/20',
     platforms: ['usv'],
@@ -115,31 +115,22 @@ const techSpecs = [
     platforms: ['rov'],
   },
   {
-    title: 'Power Systems',
-    icon: Zap,
-    detail: 'Optimized power management with hybrid and electric systems.',
-    stats: { label: 'USV Endurance', value: '72h' },
+    title: 'Main Computer',
+    icon: Cpu,
+    detail: 'Jetson Orin Nano Super with Ubuntu 24.04 and ROS 2 Jazzy for edge AI computing.',
+    stats: { label: 'Framework', value: 'ROS 2' },
     size: 'small',
-    gradient: 'from-cyan-DEFAULT/15 to-transparent',
+    gradient: 'from-navy-50/15 to-cyan-DEFAULT/10',
     platforms: ['all', 'usv'],
   },
   {
-    title: 'Battery System',
-    icon: Battery,
-    detail: 'High-density Li-ion batteries with smart BMS for UAV.',
-    stats: { label: 'Capacity', value: '25 kWh' },
+    title: 'Computer Vision',
+    icon: Brain,
+    detail: 'OpenCV and YOLO-based object detection with real-time point cloud processing.',
+    stats: { label: 'AI', value: 'YOLO' },
     size: 'small',
-    gradient: 'from-cyan-DEFAULT/15 to-blue-400/15',
-    platforms: ['uav'],
-  },
-  {
-    title: 'Tethered Power',
-    icon: Zap,
-    detail: 'High-power tether with fiber optic data link from USV.',
-    stats: { label: 'Power', value: '15 kW' },
-    size: 'small',
-    gradient: 'from-yellow-500/15 to-transparent',
-    platforms: ['rov'],
+    gradient: 'from-cyan-DEFAULT/15 to-transparent',
+    platforms: ['all', 'usv'],
   },
   {
     title: 'Cyber Security',
@@ -151,22 +142,13 @@ const techSpecs = [
     platforms: ['all', 'usv', 'uav', 'rov'],
   },
   {
-    title: 'Navigation',
-    icon: Navigation,
-    detail: 'INS/GPS with COLREGS compliance and GPS-denied capability.',
-    stats: { label: 'Accuracy', value: '<1m' },
+    title: 'Motor Driver',
+    icon: Gauge,
+    detail: '70A ESC for high-power brushless motor control with adaptive tuning.',
+    stats: { label: 'Current', value: '70A' },
     size: 'small',
     gradient: 'from-ocean-DEFAULT/15 to-cyan-DEFAULT/10',
-    platforms: ['all', 'usv', 'uav'],
-  },
-  {
-    title: 'Edge Computing',
-    icon: Cpu,
-    detail: 'Nvidia-powered AI computing for real-time decision making.',
-    stats: { label: 'Performance', value: '500 TOPS' },
-    size: 'small',
-    gradient: 'from-navy-50/15 to-cyan-DEFAULT/10',
-    platforms: ['all', 'usv', 'uav', 'rov'],
+    platforms: ['usv'],
   },
   {
     title: 'Mesh Network',
@@ -222,11 +204,10 @@ export default function TechSpecsBento() {
                 onClick={() => setActiveTab(tab.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  activeTab === tab.id
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${activeTab === tab.id
                     ? 'bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT text-navy-DEFAULT'
                     : 'glass border border-ocean-DEFAULT/30 text-metallic-DEFAULT hover:border-cyan-DEFAULT/50'
-                }`}
+                  }`}
               >
                 <Icon className="w-4 h-4" />
                 <span className="font-heading text-sm font-semibold">{tab.label}</span>
@@ -243,8 +224,8 @@ export default function TechSpecsBento() {
               spec.size === 'large'
                 ? 'col-span-2'
                 : spec.size === 'medium'
-                ? 'col-span-2 md:col-span-1'
-                : 'col-span-1'
+                  ? 'col-span-2 md:col-span-1'
+                  : 'col-span-1'
 
             return (
               <motion.div

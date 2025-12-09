@@ -3,16 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-
-// Custom North Star icon - NATO compass style with thin center
-function NorthStar({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      {/* 4-pointed star with thin sharp center like NATO compass */}
-      <path d="M12 0 L13 11 L24 12 L13 13 L12 24 L11 13 L0 12 L11 11 Z" fill="currentColor" />
-    </svg>
-  )
-}
+import Image from 'next/image'
 
 const navLinks = [
   { name: 'Technology', href: '#technology' },
@@ -51,7 +42,13 @@ export default function Navbar() {
             whileTap={{ scale: 0.98 }}
           >
             <div className="relative w-10 h-10 flex items-center justify-center">
-              <NorthStar className="w-8 h-8 text-white group-hover:text-cyan-DEFAULT transition-colors" />
+              <Image
+                src="/images/kayra-logo.png"
+                alt="KAYRA Logo"
+                width={32}
+                height={32}
+                className="object-contain group-hover:brightness-125 transition-all"
+              />
               <div className="absolute inset-0 bg-cyan-DEFAULT/20 rounded-full blur-lg group-hover:bg-cyan-DEFAULT/40 transition-all" />
             </div>
             <div className="flex flex-col">

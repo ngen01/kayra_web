@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { Linkedin, Twitter, Instagram, Mail, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 
-// Custom North Star icon - NATO compass style with thin center
+// Custom North Star icon - matching KAYRA background logo style
 function NorthStar({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      {/* 4-pointed star with thin sharp center like NATO compass */}
-      <path d="M12 0 L13 11 L24 12 L13 13 L12 24 L11 13 L0 12 L11 11 Z" fill="currentColor" />
+      {/* 4-pointed star with long elegant tapered points like background */}
+      <path d="M12 0 L13.5 9 L24 12 L13.5 15 L12 24 L10.5 15 L0 12 L10.5 9 Z" fill="currentColor" />
     </svg>
   )
 }
