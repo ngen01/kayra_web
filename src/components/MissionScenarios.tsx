@@ -129,22 +129,18 @@ export default function MissionScenarios() {
             {/* Grid Overlay */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 pointer-events-none" />
 
-            {/* Video Visualization - hidden on mobile for performance */}
+            {/* Video Visualization */}
             <div className="absolute inset-0">
-              {!isMobile ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/videos/mission-intro.mp4" type="video/mp4" />
-                </video>
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-cyan-500/20 to-ocean-500/20" />
-              )}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/mission-intro.mp4" type="video/mp4" />
+              </video>
               {/* Overlay gradient for better text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
             </div>

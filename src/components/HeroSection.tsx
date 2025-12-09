@@ -168,9 +168,8 @@ export default function HeroSection() {
           fill
           priority
           quality={100}
-          className="object-cover"
+          className="object-cover object-center md:object-right"
           sizes="100vw"
-          style={{ imageRendering: 'crisp-edges' }}
         />
       </div>
 
@@ -249,65 +248,6 @@ export default function HeroSection() {
               Ground, aerial, and swarm platforms engineered for precision, adaptability,
               and intelligent decision-making.
             </motion.p>
-
-            {/* Platform selector */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap gap-2 sm:gap-3"
-            >
-              {platforms.map((platform, index) => {
-                const Icon = platform.icon
-                return (
-                  <motion.button
-                    key={platform.id}
-                    onClick={() => setActivePlatform(index)}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`relative flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-4 rounded-xl transition-all duration-300 overflow-hidden ${activePlatform === index
-                      ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.3)]'
-                      : 'bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20'
-                      }`}
-                  >
-                    {activePlatform === index && (
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10"
-                        layoutId="activePlatform"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                    <Icon className={`w-4 h-4 sm:w-5 sm:h-5 relative z-10 ${activePlatform === index ? 'text-cyan-400' : 'text-slate-400'}`} />
-                    <span className={`font-heading text-xs sm:text-base font-semibold relative z-10 ${activePlatform === index ? 'text-white' : 'text-slate-300'}`}>
-                      {platform.name}
-                    </span>
-                  </motion.button>
-                )
-              })}
-            </motion.div>
-
-            {/* Feature pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-wrap gap-4"
-            >
-              {[
-                { icon: Brain, text: 'AI Powered' },
-                { icon: Cpu, text: 'Level 4+ Autonomy' },
-                { icon: Zap, text: 'Real-time Processing' },
-              ].map((item) => (
-                <motion.div
-                  key={item.text}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
-                >
-                  <item.icon className="w-4 h-4 text-cyan-400" />
-                  <span className="font-body text-sm text-white/80">{item.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div
