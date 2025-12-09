@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Waves, Plane, Anchor, ChevronRight, Gauge, Battery, Radio,
   Eye, Ruler, Weight, Timer
@@ -10,6 +10,18 @@ import dynamic from 'next/dynamic'
 
 // Dynamic import for 3D viewer
 const ModelViewer = dynamic(() => import('./ModelViewer'), { ssr: false })
+
+// Hook to detect mobile devices
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+  return isMobile
+}
 
 const fleet = [
   {
@@ -95,6 +107,7 @@ const fleet = [
 export default function FleetShowcase() {
   const [activeVehicle, setActiveVehicle] = useState(0)
   const vehicle = fleet[activeVehicle]
+  const isMobile = useIsMobile()
 
   return (
     <section id="fleet" className="relative py-24 overflow-hidden">
@@ -161,9 +174,10 @@ export default function FleetShowcase() {
             <div className="relative h-[280px] sm:h-[400px] lg:h-[500px] w-full">
               <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.bgColor} rounded-3xl blur-3xl opacity-50`} />
               <div className="relative h-full glass rounded-2xl border border-ocean-DEFAULT/30 overflow-hidden">
-                {/* USV: Coming Soon with blur */}
-                {vehicle.id === 'usv' ? (
-                  <div className="relative w-full h-full">
+                {/* All vehicles: Coming Soon overlay - video only on desktop for performance */}
+                <div className="relative w-full h-full">
+                  {/* Desktop: Show video, Mobile: Show gradient for performance */}
+                  {!isMobile ? (
                     <video
                       autoPlay
                       loop
@@ -172,67 +186,23 @@ export default function FleetShowcase() {
                       preload="metadata"
                       className="w-full h-full object-cover blur-sm"
                     >
-                      <source src="/videos/usv-demo.mp4" type="video/mp4" />
+                      <source src={`/videos/${vehicle.id === 'usv' ? 'usv-demo' : vehicle.id === 'uav' ? 'uav-demo' : 'rov-demo'}.mp4`} type="video/mp4" />
                     </video>
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${vehicle.bgColor} blur-sm`} />
+                  )}
 
-                    {/* Blur overlay with Coming Soon */}
-                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
-                      <div className="text-center">
-                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-cyan-500/30 to-ocean-500/30 border-2 border-cyan-DEFAULT/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(0,240,255,0.3)]">
-                          COMING SOON
-                        </span>
-                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
-                      </div>
+                  {/* Blur overlay with Coming Soon */}
+                  <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
+                    <div className="text-center">
+                      <span className={`inline-block px-6 sm:px-8 py-3 sm:py-4 font-heading text-lg sm:text-2xl font-bold tracking-widest text-white bg-gradient-to-r ${vehicle.id === 'rov' ? 'from-yellow-500/30 to-orange-500/30 border-yellow-500/50 shadow-[0_0_40px_rgba(234,179,8,0.3)]' : 'from-cyan-500/30 to-ocean-500/30 border-cyan-DEFAULT/50 shadow-[0_0_40px_rgba(0,240,255,0.3)]'
+                        } border-2 rounded-lg backdrop-blur-sm`}>
+                        COMING SOON
+                      </span>
+                      <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
                     </div>
                   </div>
-                ) : vehicle.id === 'uav' ? (
-                  /* UAV: Coming Soon with blur */
-                  <div className="relative w-full h-full">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover blur-sm"
-                    >
-                      <source src="/videos/uav-demo.mp4" type="video/mp4" />
-                    </video>
-
-                    {/* Blur overlay with Coming Soon */}
-                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
-                      <div className="text-center">
-                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border-2 border-cyan-DEFAULT/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(0,240,255,0.3)]">
-                          COMING SOON
-                        </span>
-                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  /* ROV: Coming Soon with video blur */
-                  <div className="relative w-full h-full">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover blur-sm"
-                    >
-                      <source src="/videos/rov-demo.mp4" type="video/mp4" />
-                    </video>
-                    {/* Blur overlay with Coming Soon */}
-                    <div className="absolute inset-0 backdrop-blur-md bg-navy-950/60 flex items-center justify-center">
-                      <div className="text-center">
-                        <span className="inline-block px-8 py-4 font-heading text-2xl font-bold tracking-widest text-white bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border-2 border-yellow-500/50 rounded-lg backdrop-blur-sm shadow-[0_0_40px_rgba(234,179,8,0.3)]">
-                          COMING SOON
-                        </span>
-                        <p className="mt-4 text-sm text-metallic-DEFAULT">Geliştirme aşamasında</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </div>
 
                 {/* Bottom label removed since Coming Soon is shown */}
               </div>

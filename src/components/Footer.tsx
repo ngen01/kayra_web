@@ -69,7 +69,7 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
-                Stay Ahead of the <span className="text-gradient">Wave</span>
+                Lead the <span className="text-gradient">Autonomous Revolution</span>
               </h3>
               <p className="font-body text-metallic-DEFAULT">
                 Subscribe to receive updates on our latest innovations, industry

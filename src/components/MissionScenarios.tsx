@@ -1,8 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Target, Search, Shield } from 'lucide-react'
+
+// Hook to detect mobile devices
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+  return isMobile
+}
 
 const scenarios = [
   {
@@ -30,6 +42,7 @@ const scenarios = [
 
 export default function MissionScenarios() {
   const [activeScenario, setActiveScenario] = useState(0)
+  const isMobile = useIsMobile()
 
   return (
     <section className="py-24 bg-navy-900 relative overflow-hidden">
@@ -116,18 +129,22 @@ export default function MissionScenarios() {
             {/* Grid Overlay */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 pointer-events-none" />
 
-            {/* Video Visualization */}
+            {/* Video Visualization - hidden on mobile for performance */}
             <div className="absolute inset-0">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover"
-              >
-                <source src="/videos/mission-intro.mp4" type="video/mp4" />
-              </video>
+              {!isMobile ? (
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/videos/mission-intro.mp4" type="video/mp4" />
+                </video>
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-cyan-500/20 to-ocean-500/20" />
+              )}
               {/* Overlay gradient for better text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
             </div>
