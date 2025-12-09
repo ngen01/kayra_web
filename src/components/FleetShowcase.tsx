@@ -260,24 +260,6 @@ export default function FleetShowcase() {
                   ))}
                 </div>
               </div>
-
-              {/* CTA */}
-              <div className="flex flex-wrap gap-2 sm:gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 font-heading text-sm font-semibold tracking-wider rounded-sm bg-gradient-to-r ${vehicle.color} text-navy-DEFAULT`}
-                >
-                  Technical Datasheet
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 font-heading text-sm font-semibold tracking-wider text-cyan-DEFAULT border border-cyan-DEFAULT/50 rounded-sm hover:bg-cyan-DEFAULT/10 transition-colors"
-                >
-                  Request Demo
-                </motion.button>
-              </div>
             </div>
           </motion.div>
         </AnimatePresence>
