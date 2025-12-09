@@ -164,7 +164,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-bg.png"
-          alt="KAYRA Consulting Background"
+          alt="KAYRA Technology Background"
           fill
           priority
           quality={100}

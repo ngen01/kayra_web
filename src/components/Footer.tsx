@@ -125,7 +125,7 @@ export default function Footer() {
                   KAYRA
                 </span>
                 <span className="font-heading text-[10px] tracking-[0.3em] text-metallic-DEFAULT uppercase">
-                  Consulting
+                  Technology
                 </span>
               </div>
             </motion.a>
@@ -137,11 +137,11 @@ export default function Footer() {
             {/* Contact info */}
             <div className="space-y-3">
               <a
-                href="mailto:contact@kayraconsulting.com"
+                href="mailto:contact@kayratechnology.com"
                 className="flex items-center gap-3 text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                contact@kayraconsulting.com
+                contact@kayratechnology.com
               </a>
               <a
                 href="tel:+901234567890"
@@ -244,7 +244,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-ocean-DEFAULT/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-body text-sm text-metallic-dark">
-              &copy; 2025 Kayra Consulting. All rights reserved.
+              &copy; 2025 Kayra Technology. All rights reserved.
             </p>
             <div className="flex gap-6">
               <a
