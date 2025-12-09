@@ -8,7 +8,6 @@ import Image from 'next/image'
 const navLinks = [
   { name: 'Technology', href: '#technology' },
   { name: 'Fleet', href: '#fleet' },
-  { name: 'R&D', href: '#rd' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -68,22 +67,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block relative px-6 py-2.5 font-heading text-sm font-semibold tracking-wider text-cyan-DEFAULT border border-cyan-DEFAULT/50 rounded-sm overflow-hidden group"
-          >
-            <span className="relative z-10 group-hover:text-navy-DEFAULT transition-colors duration-300">
-              Request Technical Specs
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-DEFAULT to-cyan-DEFAULT/80 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 glow-cyan" />
-          </motion.button>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -118,14 +101,6 @@ export default function Navbar() {
                   {link.name}
                 </motion.a>
               ))}
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="w-full mt-4 px-6 py-3 font-heading text-sm font-semibold tracking-wider text-navy-DEFAULT bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT rounded-sm"
-              >
-                Request Technical Specs
-              </motion.button>
             </div>
           </motion.div>
         )}
