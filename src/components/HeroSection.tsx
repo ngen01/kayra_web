@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ArrowDown, Cpu, Sparkles, Bot, Brain, Zap } from 'lucide-react'
+import Image from 'next/image'
 
 const platforms = [
   { id: 'autonomous', name: 'Autonomous', fullName: 'Self-Driving Systems', icon: Bot },
@@ -159,11 +160,19 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{ backgroundImage: "url('/images/hero-bg.png')" }}
-      />
+      {/* Background Image - Using Next.js Image for better quality */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-bg.png"
+          alt="KAYRA Consulting Background"
+          fill
+          priority
+          quality={100}
+          className="object-cover"
+          sizes="100vw"
+          style={{ imageRendering: 'crisp-edges' }}
+        />
+      </div>
 
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/70 to-navy-950/50 z-[1]" />
