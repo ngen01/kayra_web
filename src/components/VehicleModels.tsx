@@ -1,17 +1,21 @@
 'use client'
 
 import { useRef, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { Box, Cylinder, Sphere, Torus, Extrude, Tube } from '@react-three/drei'
+import { useFrame, useLoader } from '@react-three/fiber'
+import { Box, Cylinder, Sphere, Torus, Extrude, Tube, Center } from '@react-three/drei'
 import * as THREE from 'three'
+import { STLLoader } from 'three-stdlib'
+
+// --- High-Fidelity Materials ---
 
 // --- High-Fidelity Materials ---
 
 const hullMaterial = new THREE.MeshStandardMaterial({
-    color: '#0B1C3E', // Navy Blue
-    roughness: 0.2,
-    metalness: 0.8,
-    envMapIntensity: 1.5,
+    color: '#152C55', // Lighter Navy for better visibility
+    roughness: 0.3, // Smoother/Shinier surface ("parlak")
+    metalness: 0.2, // Slight metallic feel
+    side: THREE.DoubleSide,
+    envMapIntensity: 2.0, // Catch more light/reflections
 })
 
 const deckMaterial = new THREE.MeshStandardMaterial({
@@ -48,7 +52,7 @@ const carbonFiberMaterial = new THREE.MeshStandardMaterial({
     color: '#111111',
     roughness: 0.4,
     metalness: 0.5,
-    normalScale: new THREE.Vector2(1, 1), // Would need a texture for real carbon fiber, using dark metallic for now
+    normalScale: new THREE.Vector2(1, 1),
 })
 
 const safetyOrangeMaterial = new THREE.MeshStandardMaterial({
@@ -57,129 +61,45 @@ const safetyOrangeMaterial = new THREE.MeshStandardMaterial({
     metalness: 0.2,
 })
 
-// --- USV Model (Unmanned Surface Vehicle) ---
+const yellowSubMaterial = new THREE.MeshStandardMaterial({
+    color: '#EAB308', // Yellow
+    roughness: 0.3,
+    metalness: 0.5,
+})
+
+// --- USV Model (Unmanned Surface Vehicle) - STL LOADED ---
 
 export function USVModel(props: any) {
-    const radarRef = useRef<THREE.Group>(null)
-    const propLRef = useRef<THREE.Group>(null)
-    const propRRef = useRef<THREE.Group>(null)
+    const geometry = useLoader(STLLoader, '/models/usv.stl')
+    const meshRef = useRef<THREE.Mesh>(null)
 
-    useFrame((state, delta) => {
-        if (radarRef.current) radarRef.current.rotation.y += delta * 2.5
-        if (propLRef.current) propLRef.current.rotation.z += delta * 10
-        if (propRRef.current) propRRef.current.rotation.z -= delta * 10
-    })
-
-    const hullShape = useMemo(() => {
-        const shape = new THREE.Shape()
-        shape.moveTo(0, 0)
-        shape.bezierCurveTo(1.5, 0, 2.2, 4, 0, 12) // Sleek bow curve
-        shape.bezierCurveTo(-2.2, 4, -1.5, 0, 0, 0)
-        return shape
-    }, [])
+    // Ensure normals are computed for smooth shading
+    useMemo(() => {
+        if (geometry) {
+            geometry.computeVertexNormals()
+        }
+    }, [geometry])
 
     return (
         <group {...props} dispose={null}>
-            {/* Hull */}
-            <group rotation={[Math.PI / 2, Math.PI, 0]} position={[0, 0, -1]}>
-                <Extrude args={[hullShape, { depth: 2, bevelEnabled: true, bevelSize: 0.2, bevelThickness: 0.2, steps: 4 }]}>
-                    <primitive object={hullMaterial} />
-                </Extrude>
-            </group>
-
-            {/* Superstructure / Cabin */}
-            <group position={[0, 1.2, 1]}>
-                {/* Main Cabin Block */}
-                <mesh position={[0, 0, 0]}>
-                    <boxGeometry args={[2.2, 1.2, 3]} />
-                    <primitive object={hullMaterial} />
+            <Center top>
+                <mesh
+                    ref={meshRef}
+                    geometry={geometry}
+                    material={hullMaterial}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={0.1}
+                >
                 </mesh>
-
-                {/* Windshield */}
-                <mesh position={[0, 0.2, 1.3]} rotation={[0.3, 0, 0]}>
-                    <boxGeometry args={[2.0, 0.8, 0.5]} />
-                    <primitive object={glassMaterial} />
-                </mesh>
-
-                {/* Side Windows */}
-                <mesh position={[1.11, 0.2, 0]}>
-                    <boxGeometry args={[0.1, 0.6, 2]} />
-                    <primitive object={glassMaterial} />
-                </mesh>
-                <mesh position={[-1.11, 0.2, 0]}>
-                    <boxGeometry args={[0.1, 0.6, 2]} />
-                    <primitive object={glassMaterial} />
-                </mesh>
-            </group>
-
-            {/* Sensor Mast & Radar */}
-            <group position={[0, 2.5, 0]}>
-                <mesh position={[0, -0.5, 0]}>
-                    <cylinderGeometry args={[0.1, 0.2, 1.5]} />
-                    <primitive object={metalMaterial} />
-                </mesh>
-                <group ref={radarRef} position={[0, 0.3, 0]}>
-                    <mesh>
-                        <boxGeometry args={[1.8, 0.15, 0.3]} />
-                        <primitive object={deckMaterial} />
-                    </mesh>
-                    <mesh position={[0, 0, 0.16]}>
-                        <boxGeometry args={[1.7, 0.05, 0.05]} />
-                        <primitive object={accentMaterial} />
-                    </mesh>
-                </group>
-            </group>
-
-            {/* Rear Deck Details */}
-            <group position={[0, 0.8, -3]}>
-                <mesh rotation={[-Math.PI / 2, 0, 0]}>
-                    <planeGeometry args={[2.5, 3]} />
-                    <primitive object={deckMaterial} />
-                </mesh>
-                {/* Helipad / Drone Landing Marker */}
-                <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-                    <ringGeometry args={[0.8, 0.9, 32]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-                <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-                    <planeGeometry args={[0.2, 0.8]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-                <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]} position={[0, 0.01, 0]}>
-                    <planeGeometry args={[0.2, 0.8]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-            </group>
-
-            {/* Propulsion */}
-            <group position={[0, -0.5, -5]}>
-                <group position={[0.8, 0, 0]} ref={propLRef}>
-                    <mesh rotation={[Math.PI / 2, 0, 0]}>
-                        <cylinderGeometry args={[0.3, 0.1, 0.8]} />
-                        <primitive object={metalMaterial} />
-                    </mesh>
-                </group>
-                <group position={[-0.8, 0, 0]} ref={propRRef}>
-                    <mesh rotation={[Math.PI / 2, 0, 0]}>
-                        <cylinderGeometry args={[0.3, 0.1, 0.8]} />
-                        <primitive object={metalMaterial} />
-                    </mesh>
-                </group>
-                {/* Water Jet Glow */}
-                <mesh position={[0.8, 0, -0.5]}>
-                    <sphereGeometry args={[0.25]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-                <mesh position={[-0.8, 0, -0.5]}>
-                    <sphereGeometry args={[0.25]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-            </group>
+            </Center>
+            <mesh position={[0, 0.5, 0]}>
+                <pointLight distance={3} intensity={2} color="#00F0FF" />
+            </mesh>
         </group>
     )
 }
 
-// --- UAV Model (Unmanned Aerial Vehicle) ---
+// --- UAV Model (Unmanned Aerial Vehicle) - PROCEDURAL (No STL provided) ---
 
 export function UAVModel(props: any) {
     const propRef = useRef<THREE.Group>(null)
@@ -282,127 +202,30 @@ export function UAVModel(props: any) {
     )
 }
 
-// --- ROV Model (Remotely Operated Vehicle) ---
+// --- ROV Model (Remotely Operated Vehicle) - STL LOADED ---
 
 export function ROVModel(props: any) {
+    const geometry = useLoader(STLLoader, '/models/rov.stl')
+
+    useMemo(() => {
+        if (geometry) {
+            geometry.computeVertexNormals()
+        }
+    }, [geometry])
+
     return (
         <group {...props} dispose={null}>
-            {/* Main Frame - Industrial Look */}
-            <group>
-                {/* Top Frame */}
-                <mesh position={[0, 0.8, 0]}>
-                    <boxGeometry args={[2.2, 0.1, 3.2]} />
-                    <primitive object={safetyOrangeMaterial} />
-                </mesh>
-                {/* Bottom Frame */}
-                <mesh position={[0, -0.8, 0]}>
-                    <boxGeometry args={[2.2, 0.1, 3.2]} />
-                    <primitive object={safetyOrangeMaterial} />
-                </mesh>
-                {/* Vertical Struts */}
-                {[
-                    [1, 0, 1.5], [-1, 0, 1.5],
-                    [1, 0, -1.5], [-1, 0, -1.5]
-                ].map((pos, i) => (
-                    <mesh key={i} position={pos as [number, number, number]}>
-                        <cylinderGeometry args={[0.08, 0.08, 1.6]} />
-                        <primitive object={metalMaterial} />
-                    </mesh>
-                ))}
-            </group>
-
-            {/* Buoyancy Foam */}
-            <mesh position={[0, 0.5, 0]}>
-                <boxGeometry args={[1.8, 0.4, 2.8]} />
-                <meshStandardMaterial color="#FCD34D" roughness={0.9} />
+            <Center top>
+                <mesh
+                    geometry={geometry}
+                    material={hullMaterial} // Changed from yellow to Navy to match USV
+                    rotation={[0, 0, 0]} // Removed -PI/2 rotation to fix "vertical" issue
+                    scale={0.1}
+                />
+            </Center>
+            <mesh position={[0, 0, 0]}>
+                <pointLight distance={4} intensity={2} color="#EAB308" />
             </mesh>
-
-            {/* Electronics Canister (Titanium) */}
-            <mesh position={[0, -0.2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-                <cylinderGeometry args={[0.5, 0.5, 2.6, 24]} />
-                <primitive object={metalMaterial} />
-            </mesh>
-            {/* End Caps */}
-            <mesh position={[0, -0.2, 1.35]} rotation={[Math.PI / 2, 0, 0]}>
-                <cylinderGeometry args={[0.55, 0.55, 0.1, 24]} />
-                <primitive object={accentMaterial} />
-            </mesh>
-
-            {/* Thrusters (Blue Robotics style) */}
-            {[
-                { pos: [1.2, 0, 1], rot: [0, 0, 0] },
-                { pos: [-1.2, 0, 1], rot: [0, 0, 0] },
-                { pos: [1.2, 0, -1], rot: [0, 0, 0] },
-                { pos: [-1.2, 0, -1], rot: [0, 0, 0] },
-                { pos: [0, 1, 0], rot: [0, 0, Math.PI / 2] }, // Vertical
-                { pos: [0, -1, 0], rot: [0, 0, Math.PI / 2] } // Vertical
-            ].map((config, i) => (
-                <group key={i} position={config.pos as [number, number, number]} rotation={config.rot as [number, number, number]}>
-                    <mesh rotation={[Math.PI / 2, 0, 0]}>
-                        <cylinderGeometry args={[0.25, 0.2, 0.4]} />
-                        <primitive object={hullMaterial} />
-                    </mesh>
-                    <mesh rotation={[Math.PI / 2, 0, 0]}>
-                        <torusGeometry args={[0.25, 0.02, 16, 32]} />
-                        <primitive object={accentMaterial} />
-                    </mesh>
-                    {/* Propeller */}
-                    <mesh rotation={[Math.PI / 2, 0, 0]}>
-                        <cylinderGeometry args={[0.2, 0.2, 0.05, 3]} />
-                        <primitive object={deckMaterial} />
-                    </mesh>
-                </group>
-            ))}
-
-            {/* Manipulator Arm */}
-            <group position={[0.6, -0.6, 1.4]} rotation={[0, -0.2, 0]}>
-                <mesh position={[0, 0, 0.3]} rotation={[Math.PI / 2, 0, 0]}>
-                    <cylinderGeometry args={[0.08, 0.08, 0.6]} />
-                    <primitive object={metalMaterial} />
-                </mesh>
-                <mesh position={[0, 0, 0.6]}>
-                    <sphereGeometry args={[0.12]} />
-                    <primitive object={accentMaterial} />
-                </mesh>
-                <group position={[0, 0, 0.6]} rotation={[0, 0.5, 0]}>
-                    <mesh position={[0, 0, 0.3]} rotation={[Math.PI / 2, 0, 0]}>
-                        <cylinderGeometry args={[0.06, 0.06, 0.6]} />
-                        <primitive object={metalMaterial} />
-                    </mesh>
-                    {/* Claw */}
-                    <mesh position={[0, 0, 0.65]} rotation={[0, 0, 0]}>
-                        <boxGeometry args={[0.1, 0.2, 0.1]} />
-                        <primitive object={metalMaterial} />
-                    </mesh>
-                    <mesh position={[0.05, 0, 0.75]} rotation={[0, 0, -0.2]}>
-                        <boxGeometry args={[0.02, 0.05, 0.2]} />
-                        <primitive object={accentMaterial} />
-                    </mesh>
-                    <mesh position={[-0.05, 0, 0.75]} rotation={[0, 0, 0.2]}>
-                        <boxGeometry args={[0.02, 0.05, 0.2]} />
-                        <primitive object={accentMaterial} />
-                    </mesh>
-                </group>
-            </group>
-
-            {/* Lights & Camera Array */}
-            <group position={[0, 0.1, 1.4]}>
-                <mesh position={[0, 0, 0]}>
-                    <boxGeometry args={[0.8, 0.4, 0.2]} />
-                    <primitive object={hullMaterial} />
-                </mesh>
-                <mesh position={[0.2, 0, 0.11]}>
-                    <circleGeometry args={[0.12, 32]} />
-                    <primitive object={glassMaterial} />
-                </mesh>
-                <mesh position={[-0.2, 0, 0.11]}>
-                    <circleGeometry args={[0.12, 32]} />
-                    <primitive object={glassMaterial} />
-                </mesh>
-                {/* Strong Lights */}
-                <pointLight position={[0.3, 0, 0.5]} intensity={2} color="#ffffff" distance={5} />
-                <pointLight position={[-0.3, 0, 0.5]} intensity={2} color="#ffffff" distance={5} />
-            </group>
         </group>
     )
 }

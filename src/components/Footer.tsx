@@ -36,17 +36,8 @@ const footerLinks = {
 }
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  // No state needed for direct link
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      setIsSubscribed(true)
-      setEmail('')
-      setTimeout(() => setIsSubscribed(false), 3000)
-    }
-  }
 
   return (
     <footer id="contact" className="relative pt-24 pb-8 overflow-hidden">
@@ -77,32 +68,17 @@ export default function Footer() {
               </p>
             </div>
             <div>
-              <form onSubmit={handleSubscribe} className="flex gap-3">
-                <div className="flex-1 relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-5 py-4 bg-navy-DEFAULT/50 border border-ocean-DEFAULT/30 rounded-lg font-body text-white placeholder:text-metallic-dark focus:outline-none focus:border-cyan-DEFAULT/50 transition-colors"
-                  />
-                </div>
+              <div className="flex gap-3">
                 <motion.button
-                  type="submit"
+                  onClick={() => window.open('https://forms.gle/eGH3r1oZZdDyrCwg6', '_blank')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-4 bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT rounded-lg font-heading font-semibold text-navy-DEFAULT flex items-center gap-2"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-cyan-DEFAULT to-ocean-DEFAULT rounded-lg font-heading font-semibold text-navy-DEFAULT flex items-center justify-center gap-2 shadow-lg shadow-cyan-DEFAULT/20 hover:shadow-cyan-DEFAULT/40 transition-shadow"
                 >
-                  {isSubscribed ? (
-                    'Subscribed!'
-                  ) : (
-                    <>
-                      Subscribe
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
+                  Contact Us
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
-              </form>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -133,11 +109,11 @@ export default function Footer() {
             {/* Contact info */}
             <div className="space-y-3">
               <a
-                href="mailto:contact@kayratechnology.com"
+                href="mailto:kurumsal@kayra.technology"
                 className="flex items-center gap-3 text-sm text-metallic-DEFAULT hover:text-cyan-DEFAULT transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                contact@kayratechnology.com
+                kurumsal@kayra.technology
               </a>
               <div className="flex items-center gap-3 text-sm text-metallic-DEFAULT">
                 <MapPin className="w-4 h-4" />
