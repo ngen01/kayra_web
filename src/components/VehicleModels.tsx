@@ -218,8 +218,8 @@ export function ROVModel(props: any) {
             <Center top>
                 <mesh
                     geometry={geometry}
-                    material={hullMaterial} // Changed from yellow to Navy to match USV
-                    rotation={[0, 0, 0]} // Removed -PI/2 rotation to fix "vertical" issue
+                    material={hullMaterial}
+                    rotation={[0, 0, 0]}
                     scale={0.1}
                 />
             </Center>
@@ -229,3 +229,5 @@ export function ROVModel(props: any) {
         </group>
     )
 }
+
+

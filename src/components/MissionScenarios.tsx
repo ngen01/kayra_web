@@ -3,6 +3,10 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Target, Search, Shield } from 'lucide-react'
+import dynamic from 'next/dynamic'
+
+// Lazy load the video component
+const LazyVideo = dynamic(() => import('./LazyVideo'), { ssr: false })
 
 // Hook to detect mobile devices
 function useIsMobile() {
@@ -131,16 +135,10 @@ export default function MissionScenarios() {
 
             {/* Video Visualization */}
             <div className="absolute inset-0">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover"
-              >
-                <source src="/videos/mission-intro.mp4" type="video/mp4" />
-              </video>
+              <LazyVideo
+                src="/videos/mission-intro.mp4"
+                className="w-full h-full"
+              />
               {/* Overlay gradient for better text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-navy-950/30" />
             </div>
